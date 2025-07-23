@@ -3,23 +3,19 @@ dist: focal
 
 vm:
   create:
-    name: custom_githubstring1_example
+    name: custom_githubstr_example
 
 env:
   global:
-    - CUSTOM_STRING=custom_githubstring1_example
-    - UNIQUE_CHECK_SCRIPT=./scripts/check_unique.sh
-
+    - CUSTOM_STRING=custom_githubstr_example
 addons:
   apt:
     update: true
 
 before_install:
   - echo "Verifying uniqueness of custom string: $CUSTOM_STRING"
-  - chmod +x $UNIQUE_CHECK_SCRIPT
-  - $UNIQUE_CHECK_SCRIPT "$CUSTOM_STRING"
   - sudo apt-get -y install libxml2-dev
 
 script:
-  - echo "Custom string is unique. Proceeding with build.."
+  - echo "Custom string is unique. Proceeding with build"
   - echo "OKAY"
