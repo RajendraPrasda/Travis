@@ -1,0 +1,12 @@
+os: linux
+dist: focal
+vm:
+  create:
+    name: custom_github_example
+before_install:
+  - sudo apt-get -y install libxml2-dev
+addons:
+  apt:
+    update: true
+script:
+  - echo "OKAY"
