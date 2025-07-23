@@ -1,21 +1,16 @@
 os: linux
 dist: focal
 
-vm:
+vm:  # Existing key
   create:
-    name: custom_githubstr_example
+    name: my_stringtest_name  # Custom identifier string, human-readable
 
-env:
-  global:
-    - CUSTOM_STRING=custom_githubstr_example
+before_install:
+  - sudo apt-get -y install libxml2-dev
+
 addons:
   apt:
     update: true
 
-before_install:
-  - echo "Verifying uniqueness of custom string: $CUSTOM_STRING"
-  - sudo apt-get -y install libxml2-dev
-
 script:
-  - echo "Custom string is unique. Proceeding with build"
-  - echo "OKAY"
+  - echo "TEST"
