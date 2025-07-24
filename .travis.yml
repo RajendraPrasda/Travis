@@ -1,18 +1,15 @@
-arch: s390x
 os: linux
 dist: focal
 
-vm:
-  create:
-    name: my_custom_name  # custom identifier string, human readable
-
-addons:
-  apt:
-    update: true
-
-before_install:
-  - sudo apt-get -y install libxml2-dev
-
-addons:
-  apt:
-    update: true
+jobs:
+  include:
+    - name: "One Job"
+      env:
+        - CUSTOM_IMAGE_NAME=custom_one_job
+      vm:
+        create:
+          name: custom_one_job
+      before_install:
+        - echo "Starting custom image build: $CUSTOM_IMAGE_NAME"
+      script:
+        - echo "Build logic for $CUSTOM_IMAGE_NAME"
