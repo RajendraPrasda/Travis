@@ -1,16 +1,13 @@
-os: linux
+os: #unsupported
 dist: focal
 
-vm:  # Existing key
+vm:#existing key
   create:
-    name: my_testdb_name  # Custom identifier string, human-readable
-
-before_install:
-  - sudo apt-get -y install libxml2-dev
+    name: my_dbfail_name  # custom identifier string, human-readable
 
 addons:
   apt:
     update: true
 
-script:
-  - echo "TEST"
+before_install:
+  - sudo apt-get -y install libxml2-dev
