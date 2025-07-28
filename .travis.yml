@@ -1,19 +1,18 @@
 os: linux
 dist: focal
+language: generic
 
-vm:
+vm: # This key is used for VM-specific configurations
   create:
-    name: my_customone_name  # Custom identifier string, human readable
+    name: my_testcustomjob_name # This is the line you were looking for
 
-addons:
-  apt:
-    update: true
-
-before_install:
-  # Prevent Travis from auto timeout due to no output
-  - while true; do echo "💡 Build still running..."; sleep 60; done &
-  - sudo apt-get -y install libxml2-dev
-
-script:
-  - echo "Custom image setup complete. Proceeding with build tasks."
-  - sleep 5  # Replace this with your actual build step
+jobs:
+  include:
+    - stage: "Build Custom Image"
+      name: "Timeout Custom Image Build"
+      script:
+        - echo "This job will sleep for a long time without producing output..."
+        # Sleep for 15 minutes (900 seconds). This should exceed Travis CI's default 10-minute
+        # no-output timeout, leading to a timeout error.
+        - sleep 900
+        - echo "This line might not be reached if a timeout occurs."
