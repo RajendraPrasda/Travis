@@ -6,7 +6,7 @@ jobs:
     - name: "job one"
       vm:
         create:
-          name: custom_job_one_o
+          name: custom_testjob_job_one
       before_install:
         - while true; do echo "💡 Job one is still running..."; sleep 60; done &  # Prevent silent timeout
       script:
