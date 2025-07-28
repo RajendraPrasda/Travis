@@ -1,16 +1,10 @@
-os: #unsupported
-dist: focal
-
-vm:  # Existing key
-  create:
-    name: my_githubjob_onetest_name  # Custom identifier string, human-readable
-
-before_install:
-  - sudo apt-get -y install libxml2-dev
-
-addons:
-  apt:
-    update: true
-
-script:
-  - echo "GITLAB TESTING"
+jobs:
+  include:
+    - os: linux
+      language: python
+      python:
+       - "3.8"
+      arch: amd64
+      dist: focal
+      script:
+        - python hello_world.py
