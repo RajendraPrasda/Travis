@@ -3,16 +3,23 @@ dist: focal
 
 jobs:
   include:
-    - name: "job one"
+    - name: "Custom Image Job two"
       vm:
         create:
-          name: custom_testjob_job_one
+          name: custom_testjob_job_two  # This must match your DB image name
+		  state: pending
       before_install:
-        - while true; do echo "💡 Job one is still running..."; sleep 60; done &  # Prevent silent timeout
+        # Prevent Travis from killing the job due to no output
+        - while true; do echo "💡 Job is still running..."; sleep 60; done &
+
       script:
-        - echo "Running job one"
+        - echo "Starting job for custom image: custom_testjob_job_one"
+
+        # Replace the sleep below with your actual long-running task
         - |
-          if ! timeout 600s bash -c 'echo "Executing long task..."; sleep 650'; then
-            echo "Timeout Error: Job one exceeded 10 minutes of execution time"
+          if ! timeout 600s bash -c 'echo "Running long task..."; sleep 650'; then
+            echo "ERROR: Job timed out after 10 minutes of execution!"
             exit 1
           fi
+
+        - echo "Job completed successfully"
