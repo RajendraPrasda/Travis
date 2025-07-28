@@ -1,10 +1,16 @@
+os: linux
+dist: focal
 jobs:
   include:
-    - os: linux
-      language: python
-      python:
-       - "3.8"
-      arch: amd64
-      dist: focal
-      script:
-        - python hello_world.py
+    - name: job onetest
+      vm:
+        create:
+          name: custom_job_onetest_o
+      script: echo "condition with job onetest"
+before_install:
+  - sudo apt-get -y install libxml2-dev
+addons:
+  apt:
+    update: true
+script:
+  - echo "GITLAB TESTING"
