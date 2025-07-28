@@ -6,5 +6,5 @@ jobs:
     - name: "job one"
       vm:
         create:
-          name: custom_job_one_testone
-      script: echo "condition with job one testone"
+          name: custom_job_one_testone_newone
+      script: echo "condition with job one testone newone"
