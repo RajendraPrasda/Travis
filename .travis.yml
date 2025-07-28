@@ -4,7 +4,7 @@ language: generic
 
 vm: # This key is used for VM-specific configurations
   create:
-    name: my_testcustomjob_nameyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyjjjjkkk # This is the line you were looking for
+    name: my_testcustomjob_nameyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyzzzzz # This is the line you were looking for
 
 jobs:
   include:
