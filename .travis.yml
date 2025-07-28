@@ -6,5 +6,13 @@ jobs:
     - name: "job one"
       vm:
         create:
-          name: custom_job_one_testone_newone
-      script: echo "condition with job one testone newone"
+          name: custom_job_one_o
+      before_install:
+        - while true; do echo "💡 Job one is still running..."; sleep 60; done &  # Prevent silent timeout
+      script:
+        - echo "Running job one"
+        - |
+          if ! timeout 600s bash -c 'echo "Executing long task..."; sleep 650'; then
+            echo "Timeout Error: Job one exceeded 10 minutes of execution time"
+            exit 1
+          fi
