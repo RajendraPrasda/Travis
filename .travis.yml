@@ -1,11 +1,16 @@
 os: #unsupported
 dist: focal
-vm: #existing key
-create:
-name: my_customerror_name #custom identifier string, human readable
-before_install:
 
-sudo apt-get -y install libxml2-dev
+vm:  # Existing key
+  create:
+    name: my_githuberrorcheck_one_name  # Custom identifier string, human-readable
+
+before_install:
+  - sudo apt-get -y install libxml2-dev
+
 addons:
-apt:
-update: true
+  apt:
+    update: true
+
+script:
+  - echo "GITLAB TESTING"
