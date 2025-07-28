@@ -1,21 +1,10 @@
 os: linux
 dist: focal
 
-vm:
-  create:
-    name: job_one_level_8  # matches the failing job name in the log
-
-env:
-  global:
-    - CUSTOM_STRING=job_one_level_8
-
-addons:
-  apt:
-    update: true
-
-before_install:
-  - echo "Preparing to build custom image: $CUSTOM_STRING"
-  - sudo apt-get -y install non-existent-package  # Intentional failure
-
-script:
-  - echo "This step will not be reached due to previous failure"
+jobs:
+  include:
+    - name: "job one"
+      vm:
+        create:
+          name: custom_job_one_testone
+      script: echo "condition with job one testone"
