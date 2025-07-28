@@ -1,18 +1,10 @@
 os: linux
 dist: focal
-language: generic
-
-vm: # This key is used for VM-specific configurations
-  create:
-    name: my_testcustomjob_nameyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyzzzzz # This is the line you were looking for
 
 jobs:
   include:
-    - stage: "Build Custom Image"
-      name: "Timeout Custom Image Build"
-      script:
-        - echo "This job will sleep for a long time without producing output..."
-        # Sleep for 15 minutes (900 seconds). This should exceed Travis CI's default 10-minute
-        # no-output timeout, leading to a timeout error.
-        - sleep 900
-        - echo "This line might not be reached if a timeout occurs."
+    - name: "job one"
+      vm:
+        create:
+          name: @@**&&
+      script: echo "condition with job one"
