@@ -6,5 +6,5 @@ jobs:
     - name: "job one"
       vm:
         create:
-          name: 
+          name: ''
       script: echo "condition with job one"
