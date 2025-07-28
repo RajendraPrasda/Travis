@@ -1,16 +1,33 @@
 os: linux
 dist: focal
-jobs:
-  include:
-    - name: job onetest
-      vm:
-        create:
-          name: custom_job_onetest_o
-      script: echo "condition with job onetest"
-before_install:
-  - sudo apt-get -y install libxml2-dev
+
+vm:
+  create:
+    name: job_one_level_01  # Same as in the logs
+    level: 01               # Assuming "level_01" implies VM tier or permission level
+
+env:
+  global:
+    - CUSTOM_IMAGE_ID=285
+    - JOB_NAME=job_one_level_01
+
 addons:
   apt:
     update: true
+    packages:
+      - libxml2-dev
+      - build-essential
+      - curl
+
+before_install:
+  - echo "Creating custom image ID: $CUSTOM_IMAGE_ID for job: $JOB_NAME"
+  - echo "Running pre-checks and environment setup"
+
 script:
-  - echo "GITLAB TESTING"
+  - echo "Running image creation job logic..."
+  - python3 --version || exit 1
+  - lsb_release -a || exit 1
+  - echo "Custom image job execution complete"
+
+after_failure:
+  - echo "Image creation failed for $JOB_NAME with ID $CUSTOM_IMAGE_ID"
