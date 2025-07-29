@@ -1,4 +1,5 @@
 vm:
+  use: concurrent-plan-i1
   size: gpu-xlarge
 
 script:
