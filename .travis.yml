@@ -3,4 +3,4 @@ vm:
   size: gpu-xlarge
 
 script:
-  - echo "TEST1"
+  - echo "TESTNEW"
