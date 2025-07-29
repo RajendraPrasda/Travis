@@ -1,10 +1,6 @@
-os: linux
-dist: focal
+vm:
+  use: concurrent-plan-i1
+  size: gpu-xlarge
 
-jobs:
-  include:
-    - name: "job one"
-      vm:
-        create:
-          name: (***)
-      script: echo "condition with job one"
+script:
+  - echo "TEST"
