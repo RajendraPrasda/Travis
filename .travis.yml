@@ -1,23 +1,13 @@
-language: java
-dist: bionic
-arch: amd64
-
 jobs:
   include:
-    - name: "Java 8 Build"
-      jdk: openjdk8
+    - os: linux
+      language: python
+      python:
+        - '3.8'
+      arch: amd64
+      dist: focal
+      before_install:
+        - >-
+          openssl aes-256-cbc -K $encrypted_60e8b7beb8f6_key -iv $encrypted_60e8b7beb8f6_iv -in secret.txt.enc -out secret.txt -d
       script:
-        - echo "Running Java 8 build and tests..."
-        # - mvn clean install # Replace with your actual Java 8 build command
-
-    - name: "Java 11 Build"
-      jdk: openjdk11
-      script:
-        - echo "Running Java 11 build and tests..."
-        # - mvn clean install # Replace with your actual Java 11 build command
-
-    - name: "Java 17 Build"
-      jdk: openjdk17
-      script:
-        - echo "Running Java 17 build and tests..."
-        # - mvn clean install # Replace with your actual Java 17 build command
+        - python hello_world.py
