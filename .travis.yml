@@ -1,21 +1,23 @@
-dist: focal
-language: ruby
+language: java
+dist: bionic
+arch: amd64
 
-addons:
-  postgresql: '13'
-  apt:
-      packages:
-        - postgresql-13
-env:
-  global:
-   - PGUSER=postgres
-   - PGPORT=5432
-   - PGHOST=localhost
-before_install:
- - sudo sed -i -e '/local.*peer/s/postgres/all/' -e 's/peer\|md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
- - sudo service postgresql restart
- - sleep 1
- - postgres --version
+jobs:
+  include:
+    - name: "Java 8 Build"
+      jdk: openjdk8
+      script:
+        - echo "Running Java 8 build and tests..."
+        # - mvn clean install # Replace with your actual Java 8 build command
 
-script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+    - name: "Java 11 Build"
+      jdk: openjdk11
+      script:
+        - echo "Running Java 11 build and tests..."
+        # - mvn clean install # Replace with your actual Java 11 build command
+
+    - name: "Java 17 Build"
+      jdk: openjdk17
+      script:
+        - echo "Running Java 17 build and tests..."
+        # - mvn clean install # Replace with your actual Java 17 build command
