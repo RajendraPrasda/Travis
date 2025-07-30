@@ -1,6 +1,11 @@
-vm:
-  use: concurrent-plan-i1
-  size: gpu-xlarge
-
-script:
-  - echo "TEST"
+jobs:
+  include:
+    - os: linux
+      language: python
+      cache: pip
+      python:
+        - '3.8'
+      arch: amd64
+      dist: focal
+      script:
+        - python hello_world.py
