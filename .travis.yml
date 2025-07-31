@@ -1,16 +1,30 @@
+os: linux
+
+language: java
+services:
+  - docker
+cache: bundler
+dist: focal
+
+install: skip
+
 jobs:
   include:
-    - os: linux
-      language: python
-      python:
-        - '3.8'
-      arch: amd64
-      dist: focal
-      env:
-        - secure: >-
-            LszI5wOWl8yr5K5by86sRQGKMR8VvDW8P8xPsz2XJ73BuQ4gcMqq+RhXUOosRXaRaBqSzWtoJ5P30RlUexzOxwxzLfooTrYveoMlvREgwHHRUwefApSLsNgzLKOMH7tXZUdnrixU+9t4JcVWSwbDunrZsz0HrTJS0xzqXRtUAnHbxDTzVBJGaFsk15hkDKZBIPFyunn
-            e+fbznAw0T/soaq1Rj4jvlpCFaTWl4VJA4NO2q/1/M40kbjBUg9UP+ioiMqUN7lw9KHldfCSDFzu0EAGfl6Nv477PGig3WinA8yN+YVmsCCJpQZa2trXfqfzHnNq+fRs2pz1HYpIS7VS86NpUW3YKcwbBn1tew+nQL5dBndmk63uUlPkZL0NDyerEquHGzgyB+fsjGnrYLtbeaHIwi
-            zxLsjYDA0mAvXl0mzENRVrAo0iXeSO0uRX7GVYCLDFhAZUA3ySGgBOuB7sKgSu/pdCwQHzDebp7e62an8j4EDjHqEC3nOp2d39lCeEZ5M9kwgPjxaoR9hFdP0afaGNPrzpkDWb1C4OQW3+UuESn1itm7d/iLHKQqZpQhN6dvyCJfN4FlZRegroyjSFV8Oo1zptqjmUui9/ikB9aGxJ
-            AbPDdvks4xxRCvVA4FlbnlOEos8KjGL1o7u3kDN1Jk/nz30qGs+g+Ur8TCEnpCLs=
-      script:
-        - python hello_world.py
+    - name: failing
+      script: true
+
+after_success:
+  - echo done
+  - echo $TRAVIS_TEST_RESULT
+after_failure:
+  - echo failed
+  - echo $TRAVIS_TEST_RESULT
+
+deploy:
+  strategy: git
+  provider: pages
+  cleanup: true
+  token: $test_token
+  keep_history: true
+  on:
+    branch: main
